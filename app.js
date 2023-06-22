@@ -4,15 +4,31 @@ const express = require("express");
 const ejs = require("ejs");
 const { forEach } = require("lodash");
 const _ = require('lodash');
+const date = require(__dirname + '/date.js');
 
 const login = "admin";
 const password = "admin"
 
-const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
+
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
-const posts = [];
+const posts = [{
+  title: "SPIDER-MENACE STRIKES AGAIN",
+  body: "Masked Marauder, A.K.A. Spider-Man has attacked the Power Grid outside the city and J. Jonah Jameson is LIVE with an exclusive interview with an eyewitness who saw Spider-Man with their own eyes destroying multiple powerlines!"
+},
+{
+  title: "SAVIES! THE NEW SELFIES",
+  body: "There's a dangerous new trend on social media.Savie  are a selfie taken while being saved by a superhero. Young people are purposely putting themselves in dangerous situations in hopes of getting a savi to boost their online social presence. County police urge people to ignore this silly trend and stick to workout selfies. We at the Daily Bugle cannot stress this enough, DO NOT TRY THIS AT HOME!"
+},
+{
+  title: "THE TRUE HERO",
+  body: "The war on fake news has a hero: J JONAH JAMESON and THE DAILY BUGLE.NET! Where the tides of real news crash the shore of dangerous truth, the Daily Bugle will be there! Read the stories that the super-powers-that-be don’t want you to know! Stay informed! Be a real hero! Listen… to the BUGLE! Update: We want to take a moment and thank you, the people, for your resounding support of The Daily Bugle! We are a unified, like-minded network of people who all share the same passion to expose to truth no matter the cost."
+},
+{
+  title: "SHOCKING VIDEO RAISES DARK QUESTIONS ABOUT LONDON ATTACK!",
+  body: "Eugene Thompson’s high school friends call him “Flash” - but no one could have predicted how prophetic that nickname would become in the aftermath of the London attacks! In a flash of lightning and thunder, the fourth of the so-called “Elementals” was unleashed upon our world - and only the great Mysterio stood in his way. In this exclusive video, TheDailyBugle.net readers can get a first-hand glimpse at the panic and chaos on the streets of London... ... but they can also hear Flash’s ominous tone as he describes the storm falling to a swarm of “drones.” Other eye-witness accounts corroborate this strange occurrence - and we at the Bugle have to ask: what was this technology doing at the site of an Elemental attack? Is there something more to this event? And what to make of the much-remarked-upon appearance of that webbed menace, Spider-Man? Watch the video and send us your theories today!"
+}];
 
 const app = express();
 
@@ -22,7 +38,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get('/', (req, res) => {
-  res.render("home", {homeStartingContent: homeStartingContent, posts: posts});
+  const day = date.getDate();
+  res.render("home", {posts: posts, day: day});
 })
 
 app.get('/about', (req, res) => {
@@ -34,7 +51,7 @@ app.get('/contact', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  res.render("login")
+  res.render("login", {isWrong: ""})
 })
 
 app.post('/login', (req, res) =>{
@@ -48,6 +65,7 @@ app.post('/login', (req, res) =>{
     res.render("compose")
   }else{
     console.log("Wrong UserID or password, try again.");
+    res.render("login", {isWrong: "Wrong User ID or Password, try again."})
   }
 })
 

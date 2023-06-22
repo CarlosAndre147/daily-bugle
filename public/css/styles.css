@@ -1,22 +1,70 @@
+body{
+    background: url('https://www.thedailybugle.net/sites/thedailybugle/themes/custom/thedailybugle/images/bg.jpg') no-repeat;
+    background-position: center top;
+    background-size: cover;
+    font-family: 'Lora', serif;
+}
+
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
 }
+
 .navbar {
     padding-top: 15px;
     padding-bottom: 15px;
     border: 0;
     border-radius: 0;
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 5px;
+    background-color: #B50000;
+    transition: transform 0.5s ease-in; /* Added transition property */
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-.navbar-nav  li a:hover {
-    color: #1abc9c !important;
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: #ffffff;
+    background-color: transparent;
+}
+
+.navbar-nav li a:hover {
+    color: white !important;
+    transform: translateY(2px);
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
 }
 
 .footer-padding {
 	padding-bottom: 60px;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.post{
+    background: rgba(222, 222, 222, .7);
+    padding: 0.3rem;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+    border-top: 3px solid #B50000;
+    font-family: 'Lora', serif;
+}
+
+.postTitle{
+    color: #B50000;
+}
+
+.postBody{
+    font-size: 16px;
+}
+
+.loginError{
+    margin-top: 25px;
+    font-size: 2rem;
 }
 
 .footer {
@@ -25,7 +73,7 @@
 	bottom: 0;
 	width: 100%;
 	height: 60px;
-	background-color: #1abc9c;
+	background-color: #000000;
 }
 
 .footer p {

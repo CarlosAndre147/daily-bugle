@@ -1,6 +1,6 @@
 <%- include('partials/header.ejs'); -%>
 
-<h1>Login</h1>
+<h1 class="postTitle">Login</h1>
 
 <form action="/login" method="post" class="form">
     <div class="mb-3">
@@ -13,7 +13,9 @@
         <input type="text" name="password" class="form-control" size="50" id="password">
     </div>
     <br>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-danger">Login</button>
+
+    <p class="loginError"><%= isWrong %><p>
 </form>
 
 
