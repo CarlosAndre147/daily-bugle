@@ -20,12 +20,6 @@ app.use(express.static("public"));
 
 app.get('/', (req, res) => {
   res.render("home", {homeStartingContent: homeStartingContent, posts: posts});
-  // const post = {
-  //   title: "Test",
-  //   body: "Bla bla bla"
-  //   };
-
-  //   posts.push(post);
 })
 
 app.get('/about', (req, res) => {
@@ -58,7 +52,7 @@ app.get("/posts/:postName", (req, res) => {
     const storedTitle = _.lowerCase(post.title);
 
     if(requestedTitle === storedTitle){
-      console.log("Match found");
+      res.render("post", {post: post});
     }
   }) 
 })

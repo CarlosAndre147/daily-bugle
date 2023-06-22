@@ -8,8 +8,11 @@
 <div>
     <% posts.forEach((post) => { %>
         <h2><%= post.title %></h2>
-        <p><%= post.body %></p>
-        <br>
+        <p>
+            <%= post.body.substring(0, 100) %>...
+            <a href="/posts/<%= post.title %>">Read More</a>
+            
+        </p>
     <% }) %>
     
 </div>
