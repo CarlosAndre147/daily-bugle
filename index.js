@@ -9,6 +9,8 @@ require('dotenv').config();
 const login = process.env.LOGIN;
 const password = process.env.PASSWORD;
 
+console.log(process.env.MONGO_URI);
+
 const connectDB = async () => {
   try {
       const conn = await mongoose.connect(process.env.MONGO_URI);
