@@ -11,7 +11,7 @@ const password = process.env.DB_PASSWORD;
 
 const connectDB = async () => {
   try {
-       const conn = await mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
+       const conn = await mongoose.connect("mongodb+srv://carlosandrealmeida139:LWdmjYiMTHUQWBDN@cluster0.nkq7olb.mongodb.net/dailyBugleDB", {useNewUrlParser: true});
        console.log('MongoDB Connected.');
   } catch (error) {
       console.log(error);
