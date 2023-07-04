@@ -11,6 +11,8 @@ const password = process.env.PASSWORD;
 const uri = process.env.MONGO_URI
 console.log(uri);
 
+mongoose.set('strictQuery', false);
+
 const connectDB = async () => {
   try {
       const conn = await mongoose.connect(uri);
