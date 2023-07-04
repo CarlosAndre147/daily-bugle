@@ -82,3 +82,40 @@ body{
 	font-size: 12px;
     color: #fff;
 }
+
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-signin {
+    max-width: 300px;
+    padding: 1rem;
+  
+  }
+  
+  .form-signin .form-floating:focus-within {
+    z-index: 2;
+  }
+  
+  .top {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .middle {
+    margin-bottom: -1px;
+    border-radius: 0;
+  }
+  
+  .bottom {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+  }
+  
+  .img{
+      margin-left: 6.5rem;
+  }

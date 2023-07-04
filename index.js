@@ -5,13 +5,18 @@ const _ = require('lodash');
 const mongoose = require("mongoose");
 const date = require(__dirname + '/date.js');
 require('dotenv').config();
+const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 const login = process.env.LOGIN;
 const password = process.env.PASSWORD;
-const uri = process.env.MONGO_URI
-console.log(uri);
+const uri = process.env.MONGO_URI;
+const apiKey = process.env.API_KEY;
+const server = process.env.SERVER;
 
-// mongoose.set('strictQuery', false);
+mailchimp.setConfig({
+  apiKey: apiKey,
+  server: server,
+});
 
 const connectDB = async () => {
   try {
@@ -92,6 +97,50 @@ app.get('/contact', (req, res) => {
   res.render("contact", {contactContent: contactContent});
 })
 
+app.get('/newsletter', (req, res) => {
+  res.render("newsletter")
+})
+
+app.post('/newsletter', (req, res) => {
+  const firstName = req.body.fName;
+  const lastName = req.body.lName;
+  const email = req.body.email;
+
+  const data = {
+    members: [
+        {
+            email_address: email,
+            status: "subscribed",
+            merge_fields: {
+                FNAME: firstName,
+                LNAME: lastName,
+            }
+        }
+    ]
+  }
+
+  const run = async (data) => {
+    const response = await mailchimp.lists.batchListMembers("b0ed5b3da8", data);
+
+    const errors = response.errors;
+    const errorLength = errors.length;
+    
+    console.log("Number of errors:", errorLength);
+    if (errorLength > 0){
+        console.log("Errors:");
+        for (var i = 0; i < errorLength; i++){
+            console.log(errors[i].error);
+        }
+        res.render("failure")
+    }else{
+        console.log("Success!");
+        res.render("success")
+    }        
+  };
+
+  run(data);
+})
+
 app.get('/login', (req, res) => {
   res.render("login", {isWrong: ""})
 })
@@ -136,7 +185,6 @@ app.get("/posts/:postId", (req, res) => {
     console.log(err);
   })
 })
-
 
 connectDB().then(() => {
   app.listen(3000, () => {
