@@ -13,12 +13,12 @@ console.log(uri);
 
 const connectDB = async () => {
   try {
-      const conn = await mongoose.connect("mongodb+srv://carlosandrealmeida139:LWdmjYiMTHUQWBDN@cluster0.nkq7olb.mongodb.net/dailyBugleDB");
+      const conn = await mongoose.connect(uri);
       console.log('MongoDB Connected.');
   } catch (error) {
       console.log(error);
       console.log(uri);
-      //process.exit(1)
+      process.exit(1)
   }
 }
 
