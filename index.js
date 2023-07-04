@@ -11,7 +11,7 @@ const password = process.env.DB_PASSWORD;
 
 const connectDB = async () => {
   try {
-       const conn = await mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+       const conn = await mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
        console.log('MongoDB Connected.');
   } catch (error) {
       console.log(error);
@@ -125,7 +125,6 @@ app.get("/posts/:postId", (req, res) => {
 
   Post.findById(postId)
   .then((result) => {
-    console.log(result.title);
     res.render("post", {post: result});
   })
   .catch((err)=>{
