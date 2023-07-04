@@ -10,7 +10,7 @@
             <h2 class="postTitle"><%= post.title %></h2>
             <p class="postBody">
                 <%= post.body.substring(0, 100) %>...
-                <a href="/posts/<%= post.title %>">Read More</a>          
+                <a href="/posts/<%= post._id %>">Read More</a>          
             </p>
         </div>
     <% }) %>   
