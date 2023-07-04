@@ -8,16 +8,17 @@ require('dotenv').config();
 
 const login = process.env.LOGIN;
 const password = process.env.PASSWORD;
-
-console.log(process.env.MONGO_URI);
+const uri = process.env.MONGO_URI
+console.log(uri);
 
 const connectDB = async () => {
   try {
-      const conn = await mongoose.connect(process.env.MONGO_URI);
+      const conn = await mongoose.connect(uri);
       console.log('MongoDB Connected.');
   } catch (error) {
       console.log(error);
-      process.exit(1)
+      console.log(uri);
+      //process.exit(1)
   }
 }
 
